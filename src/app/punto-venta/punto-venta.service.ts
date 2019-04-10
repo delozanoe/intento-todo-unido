@@ -6,6 +6,9 @@ import {PuntoVentaDetail} from './punto-venta-detail';
 const API_URL = '../../assets/';
 const puntosVenta = 'puntos-venta.json';
 
+const API_BACK ='http://localhost:8080/s3_carros-api/api';
+const resource = '/puntosdeVenta';
+
 @Injectable()
 export class PuntoVentaService {
 
@@ -13,15 +16,16 @@ export class PuntoVentaService {
 
   getPuntosVenta(): Observable<PuntoVenta[]>
   {
-    return this.http.get<PuntoVenta[]>(API_URL + puntosVenta);
+      return this.http.get<PuntoVenta[]>(API_BACK + resource);
   }
   getPuntoVentaDetail(puntoVentaId): Observable<PuntoVentaDetail>
   {
-  return this.http.get<PuntoVentaDetail>(API_URL+ "punto-venta-"+ puntoVentaId+ ".json"); 
+    console.log(API_URL+ "punto-venta-"+ puntoVentaId+ ".json"); 
+  return this.http.get<PuntoVentaDetail>(API_BACK + resource + '/' + puntoVentaId); 
   }
 
   createPuntoVenta(puntoVenta): Observable<PuntoVenta>
   {
-    return this.http.post<PuntoVenta>(API_URL+puntosVenta, puntoVenta);
+      return this.http.post<PuntoVenta>(API_BACK + resource, puntoVenta);
   }
 }

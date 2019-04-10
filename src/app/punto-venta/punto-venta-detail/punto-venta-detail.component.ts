@@ -12,33 +12,33 @@ import { PuntoVentaDetail } from '../punto-venta-detail';
 })
 export class PuntoVentaDetailComponent implements OnInit {
 
-@Input()   puntoVentaDetail: PuntoVentaDetail;
-
+ @Input() puntoVentaDetail: PuntoVentaDetail;
   constructor(
     private puntoVentaService: PuntoVentaService,
     private route: ActivatedRoute
   ) { }
 
-
+  
 
    puntoVenta_id: number;
-   
+ 
   getPuntoVentaDetail(): void
   {
-    this.puntoVentaService.getPuntoVentaDetail(this.puntoVenta_id).subscribe(obser => {
-      this.puntoVentaDetail = obser 
-      });
+    this.puntoVentaService.getPuntoVentaDetail(this.puntoVenta_id).subscribe(obser => {this.puntoVentaDetail = obser });
   }
 
-ngOnInit()
-{
-  this.puntoVenta_id = +this.route.snapshot.paramMap.get('id');
-  if(this.puntoVenta_id)
+
+
+  ngOnInit() 
   {
-    this.puntoVentaDetail = new PuntoVentaDetail();
-    this.getPuntoVentaDetail();
+      this.puntoVenta_id = +this.route.snapshot.paramMap.get('id');
+        if (this.puntoVenta_id){
+        this.puntoVentaDetail = new PuntoVentaDetail();
+        this.getPuntoVentaDetail();
+    
   }
-}
-  
+  }
+
+
 
 }
